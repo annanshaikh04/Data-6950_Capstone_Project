@@ -1,0 +1,16 @@
+.env
+__pycache__/
+*.pyc
+.streamlit/
+! .streamlit/config.toml
+database/*.db
+outputs/*.csv
+outputs/*.png
+outputs/*.txt
+# Keep specific thesis report images if needed, but usually binary files are ignored
+# For now, let's keep the DB out of git if it's large, but the user said "Your database is included in your repo"
+# wait, the tip said "Your database (investment_platform.db) is included in your repo."
+# So I should NOT ignore it if they want it deployed with data.
+# However, usually it's better to keep it out if it changes often.
+# I'll stick to the user's "included in repo" preference but ignore the .env.
+! database/investment_platform.db
