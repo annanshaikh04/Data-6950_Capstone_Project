@@ -131,13 +131,23 @@ def load_lottieurl(url: str):
 # Assets
 lottie_analytics = load_lottieurl("https://assets10.lottiefiles.com/packages/lf20_qpwb7iic.json")
 
+# Add models directory to path for class discovery
+sys.path.append(str(BASE_DIR.parent / "models"))
+try:
+    from deep_llm_fusion import DeepLLM_DualEncoder
+except ImportError:
+    # This might happen if running in a unique environment, though path append should handle it
+    DeepLLM_DualEncoder = None
+
 @st.cache_resource
 def get_model():
     if MODEL_PATH.exists():
-        # Inject models dir to path for pickle to find the class def
-        sys.path.append(str(BASE_DIR.parent / "models"))
-        with open(MODEL_PATH, "rb") as f:
-            return pickle.load(f)
+        try:
+            with open(MODEL_PATH, "rb") as f:
+                return pickle.load(f)
+        except Exception as e:
+            st.error(f"Model Loading Error: {e}")
+            return None
     return None
 
 @st.cache_data
