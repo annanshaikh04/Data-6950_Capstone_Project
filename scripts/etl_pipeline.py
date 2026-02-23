@@ -62,7 +62,10 @@ def run_etl():
     # Ensure columns exist, fill missing with None
     dim_startup_df = pd.DataFrame()
     for col in startup_cols:
-        dim_startup_df[col] = df[col] if col in df.columns else None
+        if col == 'description' and 'description' not in df.columns and 'market' in df.columns:
+            dim_startup_df['description'] = df['market']
+        else:
+            dim_startup_df[col] = df[col] if col in df.columns else None
     
     # Drop rows without a name (constraint violation)
     dim_startup_df = dim_startup_df.dropna(subset=['name'])
