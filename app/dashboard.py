@@ -16,7 +16,7 @@ DB_PATH = BASE_DIR.parent / "database" / "investment_platform.db"
 MODEL_PATH = BASE_DIR.parent / "models" / "deep_llm_v1.pkl"
 
 # Page Config
-st.set_page_config(page_title="VentureFlow AI | Premium Intelligence", layout="wide", page_icon="🚀", initial_sidebar_state="expanded")
+st.set_page_config(page_title="VentureFlow Intelligence", layout="wide", page_icon="📈", initial_sidebar_state="expanded")
 
 # Initialize Session State
 if 'watchlist' not in st.session_state:
@@ -113,11 +113,16 @@ st.markdown("""
         transform: scale(1.02);
     }
 
-    /* Search Bar Input */
+    /* Search Bar Input Visibility */
     .stTextInput > div > div > input {
-        background: rgba(255, 255, 255, 0.05) !important;
+        background: rgba(40, 50, 70, 0.9) !important;
         color: white !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border: 1px solid rgba(46, 204, 113, 0.5) !important;
+        border-radius: 8px;
+    }
+    .stTextInput > label {
+        color: #94A3B8 !important;
+        font-weight: 600;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -182,7 +187,7 @@ def premium_metric(title, value, delta, color="#2ECC71"):
 
 def main():
     # Sidebar
-    st.sidebar.title("🚀 VentureFlow AI")
+    st.sidebar.title("VentureFlow Intelligence")
     st.sidebar.markdown("---")
     
     # Global Search
