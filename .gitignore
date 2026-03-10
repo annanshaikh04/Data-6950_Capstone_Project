@@ -4,9 +4,12 @@ __pycache__/
 .streamlit/
 ! .streamlit/config.toml
 database/*.db
-outputs/*.csv
-outputs/*.png
-outputs/*.txt
+
+# Allow research artifacts for the live dashboard
+! outputs/*.csv
+! outputs/*.png
+! outputs/*.txt
+
 # Keep specific thesis report images if needed, but usually binary files are ignored
 # For now, let's keep the DB out of git if it's large, but the user said "Your database is included in your repo"
 # wait, the tip said "Your database (investment_platform.db) is included in your repo."
