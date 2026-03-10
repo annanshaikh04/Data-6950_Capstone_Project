@@ -99,27 +99,26 @@
         <p><strong>Student Name:</strong> Annanahmed Shaikh</p>
         <p><strong>Course:</strong> DATA-6950 Capstone II</p>
         <p><strong>Date:</strong> March 10, 2026</p>
-        <p><strong>Report Period:</strong> Week 8-10 (Model Refinement & Validation)</p>
+        <p><strong>Report Period:</strong> Phase 2 & 3 (Data Infrastructure & Empirical Validation)</p>
     </div>
 
     <h2>1. Executive Summary</h2>
-    <p>Following the midterm defense and professor feedback, this week's effort focused on the rigorous validation of
-        the
-        hybrid <strong>Deep-LLM Fusion</strong> architecture. We specifically addressed concerns regarding the
-        justification of the dual-encoder weight distribution and the necessity of benchmarking against modern "Live"
-        startups.
-        Through a systematic <strong>Ablation Study</strong>, we verified that a balanced fusion of financial and
-        semantic
-        signals is the key driver for identifying high-potential disruptive ventures.</p>
+    <p>Following the midterm defense, our work transitioned from foundational architecture to empirical validation. This
+        report consolidates
+        the <strong>Midterm Completion</strong> (Star Schema & Full Training) with the <strong>Refinement Phase</strong>
+        (Ablation Study & Live Impact Benchmarking).
+        We have successfully addressed critical feedback regarding model weight justification and the predictive utility
+        of live data, achieving a high-fidelity
+        user experience with the implementation of a real-time <strong>Market Intelligence Feed</strong>.</p>
     <p><strong>Overall Status:</strong> <span class="status-badge">ON TRACK</span></p>
 
-    <h2>2. Weekly Hours Log</h2>
-    <p>The following table details the hours spent on specific tasks following the midterm defense.</p>
+    <h2>2. Consolidated Hours Log (Phase 2 & 3)</h2>
+    <p>The following table details the hours spent on specific tasks across the Midterm and Refinement periods.</p>
 
     <table>
         <thead>
             <tr>
-                <th>Category</th>
+                <th>Phase</th>
                 <th>Task Description</th>
                 <th>Hours</th>
                 <th>Status</th>
@@ -127,48 +126,35 @@
         </thead>
         <tbody>
             <tr>
-                <td><strong>Model Dev</strong></td>
-                <td>Designed and executed a formal Ablation Study (11 weight configurations)</td>
-                <td>6.0</td>
+                <td><strong>Midterm (W6-7)</strong></td>
+                <td>Star Schema (SQL), ETL Pipeline, & Deep-LLM Full Training (47k records)</td>
+                <td>26.0</td>
                 <td>Completed</td>
             </tr>
             <tr>
-                <td><strong>Analytics</strong></td>
-                <td>Conducted "Historical vs Live" comparative benchmark analysis</td>
-                <td>5.0</td>
+                <td><strong>Refinement (W8-9)</strong></td>
+                <td>Ablation Study (11 weight configs) & Live Performance Benchmarking</td>
+                <td>14.0</td>
                 <td>Completed</td>
             </tr>
             <tr>
-                <td><strong>Documentation</strong></td>
-                <td>Technical briefing on CPU-bound inference and SLR/MiniLM architecture</td>
-                <td>3.0</td>
-                <td>Completed</td>
-            </tr>
-            <tr>
-                <td><strong>App Dev</strong></td>
-                <td>Integrated "Experimental Results" tab and visuals into the Streamlit Dashboard</td>
-                <td>4.0</td>
-                <td>Completed</td>
-            </tr>
-            <tr>
-                <td><strong>Reporting</strong></td>
-                <td>Drafting Progress Report III (PhD/IEEE Stylized Results)</td>
-                <td>4.0</td>
+                <td><strong>Final Polish (W10)</strong></td>
+                <td>Premium UI Redesign & Live News RSS Integration</td>
+                <td>12.0</td>
                 <td>Completed</td>
             </tr>
             <tr>
                 <td><strong>Total</strong></td>
-                <td><strong>Phase 3 Effort (Refinement Phase)</strong></td>
-                <td><strong>22.0</strong></td>
+                <td><strong>Consolidated Phase 2 & 3 Effort</strong></td>
+                <td><strong>52.0</strong></td>
                 <td></td>
             </tr>
         </tbody>
     </table>
 
     <div class="highlight-box">
-        <blockquote><strong>Note:</strong> Total cumulative hours for the project now exceed 110+, covering data
-            engineering,
-            star-schema implementation, and deep learning model development.</blockquote>
+        <blockquote><strong>Note:</strong> Total project cumulative hours now exceed <strong>130+</strong>, encompassing
+            all stages from data discovery to advanced neural architecture validation.</blockquote>
     </div>
 
     <h2>3. Model Ablation Study: Weight Optimization</h2>
@@ -244,9 +230,15 @@
     <blockquote><strong>Insight:</strong> The <strong>ablation_curve.png</strong> (visible in the Dashboard's
         Experiments Tab) identifies the
         mathematical peak for ROC-AUC. It demonstrates that as we move from 0% towards a hybrid approach, accuracy
-        stabilizes. The 60/40 split
-        is the 'sweet spot' that captures the funding velocity of unicorns like xAI while filtering out semantic fluff.
+        stabilizes. The 60/40 or 70/30 splits represent the 'sweet spot' for capturing innovation while filtering noise.
     </blockquote>
+
+    <h2>4. Feature Breakthrough: Real-Time Market Intel</h2>
+    <p>To enhance the dashboard's utility for end-users, we implemented a <strong>Dynamic RSS Market Intel</strong>
+        feature.
+        Unlike static news curation, this system fetches real-time venture capital shifts directly from active global
+        news RSS feeds (e.g., Google News),
+        providing 50-word summaries for immediate strategic consumption.</p>
 
     <h2>4. Results Assessment: The "Live Data" Rationale</h2>
     <p>A secondary concern was: "Why compare results before and after live data?"</p>

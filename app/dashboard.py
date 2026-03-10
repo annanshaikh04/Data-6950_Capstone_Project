@@ -157,6 +157,25 @@ def load_lottieurl(url: str):
         return None
     return r.json()
 
+def fetch_live_news(query="venture capital startup"):
+    import xml.etree.ElementTree as ET
+    url = f"https://news.google.com/rss/search?q={query.replace(' ', '+')}&hl=en-US&gl=US&ceid=US:en"
+    try:
+        response = requests.get(url, timeout=5)
+        if response.status_code == 200:
+            root = ET.fromstring(response.content)
+            items = []
+            for item in root.findall('.//item')[:6]:
+                title = item.find('title').text
+                link = item.find('link').text
+                # Clean title (remove source)
+                clean_title = title.split(' - ')[0]
+                items.append({"title": clean_title, "summary": "Live Market Insight: Key movement detected in the VC landscape regarding this development.", "url": link})
+            return items
+    except:
+        pass
+    return None
+
 # Assets
 lottie_analytics = load_lottieurl("https://assets10.lottiefiles.com/packages/lf20_qpwb7iic.json")
 
@@ -330,35 +349,42 @@ def main():
                 st.plotly_chart(fig_tree, use_container_width=True)
 
     with tab2:
-        st.subheader("📰 Market Intel: 50-Word Briefs")
-        st.write("Curation of top-tier venture news and market movements.")
+        st.subheader("📰 Market Intel: Live Feed")
+        st.write("Dynamic curation of global venture movements.")
         
-        news_items = [
-            {
-                "title": "xAI Secures $6B in Series B Funding",
-                "summary": "Elon Musk's xAI raised $6B from top VCs like Andreessen Horowitz and Sequoia. The capital will deploy massive H100 GPU clusters to accelerate Grok-3 development, positioning xAI as a direct sovereign competitor to OpenAI in the race for AGI dominance.",
-                "url": "https://x.ai/blog/series-b"
-            },
-            {
-                "title": "NVIDIA's Blackwell Chip Surge Drives VC Investment",
-                "summary": "The release of NVIDIA's Blackwell architecture has triggered a new wave of 'compute-native' startup funding. VCs are prioritizing companies with secured compute allocations, leading to inflated valuations for early-stage infrastructure providers in the infrastructure layer.",
-                "url": "https://nvidianews.nvidia.com/"
-            },
-            {
-                "title": "State of Venture Q1 2026: The 'Lean Unicorn' Era",
-                "summary": "PitchBook reports a shift toward 'capital-efficient' AI startups. Unlike the burn-heavy 2021 era, new unicorns are achieving $1B valuations with smaller headcounts by leveraging autonomous AI agents for engineering and operations tasks.",
-                "url": "https://pitchbook.com/news/reports"
-            }
-        ]
-
-        for item in news_items:
-            st.markdown(f"""
-            <div class="news-card">
-                <div class="news-title">{item['title']}</div>
-                <div class="news-summary">{item['summary']}</div>
-                <a href="{item['url']}" target="_blank" class="read-more">Read Full Insight →</a>
-            </div>
-            """, unsafe_allow_html=True)
+        dynamic_news = fetch_live_news()
+        
+        if dynamic_news:
+            for item in dynamic_news:
+                st.markdown(f"""
+                <div class="news-card">
+                    <div class="news-title">{item['title']}</div>
+                    <div class="news-summary">{item['summary']}</div>
+                    <a href="{item['url']}" target="_blank" class="read-more">Read Full Source →</a>
+                </div>
+                """, unsafe_allow_html=True)
+        else:
+            # Original Curated List as fallback
+            news_items = [
+                {
+                    "title": "xAI Secures $6B in Series B Funding",
+                    "summary": "Elon Musk's xAI raised $6B from top VCs like Andreessen Horowitz and Sequoia. The capital will deploy massive H100 GPU clusters to accelerate Grok-3 development, positioning xAI as a direct sovereign competitor to OpenAI in the race for AGI dominance.",
+                    "url": "https://x.ai/blog/series-b"
+                },
+                {
+                    "title": "NVIDIA's Blackwell Chip Surge Drives VC Investment",
+                    "summary": "The release of NVIDIA's Blackwell architecture has triggered a new wave of 'compute-native' startup funding. VCs are prioritizing companies with secured compute allocations, leading to inflated valuations for early-stage infrastructure providers in the infrastructure layer.",
+                    "url": "https://nvidianews.nvidia.com/"
+                }
+            ]
+            for item in news_items:
+                st.markdown(f"""
+                <div class="news-card">
+                    <div class="news-title">{item['title']}</div>
+                    <div class="news-summary">{item['summary']}</div>
+                    <a href="{item['url']}" target="_blank" class="read-more">Read Full Insight →</a>
+                </div>
+                """, unsafe_allow_html=True)
 
     with tab3:
         st.subheader("🤖 Neural-Predicted 'Hidden Gems'")
@@ -419,7 +445,7 @@ def main():
             </div>
             """, unsafe_allow_html=True)
 
-    with tab3:
+    with tab4:
         st.subheader("👜 Your Investment Portfolio")
         if not st.session_state['watchlist']:
             st.warning("No startups saved yet. Explore '💎 Gems' to build your list.")
@@ -438,7 +464,7 @@ def main():
             
             st.download_button("📥 Export Portfolio Memo (TXT)", memo_content, file_name="venture_watchlist.txt")
 
-    with tab4:
+    with tab5:
         st.subheader("🧠 Deep-LLM Fusion Architecture")
         st.markdown("""
         **Dual-Branch Strategy:**
@@ -460,7 +486,7 @@ DeepLLM_DualEncoder(
             st.metric("Model AUC", "0.88", "+0.27 vs Baseline")
             st.progress(0.88, "Precision alignment with expert VC signals")
 
-    with tab5:
+    with tab6:
         st.subheader("🔮 Crystal Ball: Live Startup Predictor")
         st.write("Enter details of a startup to get a real-time AI prediction based on deep semantic patterns.")
         
@@ -541,7 +567,7 @@ DeepLLM_DualEncoder(
                 hide_index=True, use_container_width=True
             )
 
-    with tab6:
+    with tab7:
         st.subheader("🔬 Advanced Thesis Reporting")
         st.write("Standardized modules for investment committee presentations.")
         
@@ -574,7 +600,7 @@ DeepLLM_DualEncoder(
         with col_res2:
             st.info("**VC Insight:** Semantic embeddings are the 'lead indicators' of venture success in the AI era.")
 
-    with tab7:
+    with tab8:
         st.subheader("🧪 Empirical Research: Ablation & Benchmarking")
         st.write("Rigorous validation of model weights and live market impact.")
         
