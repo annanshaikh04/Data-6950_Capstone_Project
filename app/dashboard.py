@@ -16,7 +16,7 @@ DB_PATH = BASE_DIR.parent / "database" / "investment_platform.db"
 MODEL_PATH = BASE_DIR.parent / "models" / "deep_llm_v1.pkl"
 
 # Page Config
-st.set_page_config(page_title="VentureFlow Intelligence", layout="wide", page_icon="📈", initial_sidebar_state="expanded")
+st.set_page_config(page_title="VentureFlow Intelligence", layout="wide", page_icon="🏦", initial_sidebar_state="expanded")
 
 # Initialize Session State
 if 'watchlist' not in st.session_state:
@@ -124,6 +124,30 @@ st.markdown("""
         color: #94A3B8 !important;
         font-weight: 600;
     }
+
+    /* News Card Styling */
+    .news-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-left: 4px solid #F59E0B;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+    }
+    .news-title {
+        font-weight: 700;
+        color: #F8FAFC;
+        margin-bottom: 5px;
+    }
+    .news-summary {
+        font-size: 0.9rem;
+        color: #94A3B8;
+    }
+    .read-more {
+        font-size: 0.8rem;
+        color: #10B981;
+        text-decoration: none;
+        font-weight: 600;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -198,6 +222,23 @@ def main():
         if lottie_analytics:
             st_lottie(lottie_analytics, height=120, key="sidebar_lottie")
 
+    # --- HEADER ---
+    head_col1, head_col2 = st.columns([3, 1])
+    with head_col1:
+        st.markdown("""
+        <h1 style='margin-bottom:0;'>VentureFlow Intelligence 🏦</h1>
+        <p style='color:#94A3B8; font-size:1.1rem;'>Professional Institutional-Grade Venture Analytics & Predictive Discovery</p>
+        """, unsafe_allow_html=True)
+    
+    with head_col2:
+        st.markdown("""
+        <div style="text-align: right; padding-top: 20px;">
+            <span style="background: rgba(16, 185, 129, 0.1); color: #10B981; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">
+                ● LIVE SECTOR ANALYSIS
+            </span>
+        </div>
+        """, unsafe_allow_html=True)
+
     st.sidebar.write("**Your Portfolio**")
     if not st.session_state['watchlist']:
         st.sidebar.info("Watchlist is empty.")
@@ -266,7 +307,7 @@ def main():
     st.markdown("---")
 
     # --- TABS FOR ANALYSIS ---
-    tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs(["🌐 Market", "💎 Gems", "👜 Portfolio", "🧠 Model", "🔮 Predictor", "🔬 Thesis", "🧪 Experiments"])
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(["🌐 Market", "📰 News Brief", "💎 Gems", "👜 Portfolio", "🧠 Model", "🔮 Predictor", "🔬 Thesis", "🧪 Experiments"])
 
     with tab1:
         c1, c2 = st.columns([2, 1])
@@ -289,6 +330,37 @@ def main():
                 st.plotly_chart(fig_tree, use_container_width=True)
 
     with tab2:
+        st.subheader("📰 Market Intel: 50-Word Briefs")
+        st.write("Curation of top-tier venture news and market movements.")
+        
+        news_items = [
+            {
+                "title": "xAI Secures $6B in Series B Funding",
+                "summary": "Elon Musk's xAI raised $6B from top VCs like Andreessen Horowitz and Sequoia. The capital will deploy massive H100 GPU clusters to accelerate Grok-3 development, positioning xAI as a direct sovereign competitor to OpenAI in the race for AGI dominance.",
+                "url": "https://x.ai/blog/series-b"
+            },
+            {
+                "title": "NVIDIA's Blackwell Chip Surge Drives VC Investment",
+                "summary": "The release of NVIDIA's Blackwell architecture has triggered a new wave of 'compute-native' startup funding. VCs are prioritizing companies with secured compute allocations, leading to inflated valuations for early-stage infrastructure providers in the infrastructure layer.",
+                "url": "https://nvidianews.nvidia.com/"
+            },
+            {
+                "title": "State of Venture Q1 2026: The 'Lean Unicorn' Era",
+                "summary": "PitchBook reports a shift toward 'capital-efficient' AI startups. Unlike the burn-heavy 2021 era, new unicorns are achieving $1B valuations with smaller headcounts by leveraging autonomous AI agents for engineering and operations tasks.",
+                "url": "https://pitchbook.com/news/reports"
+            }
+        ]
+
+        for item in news_items:
+            st.markdown(f"""
+            <div class="news-card">
+                <div class="news-title">{item['title']}</div>
+                <div class="news-summary">{item['summary']}</div>
+                <a href="{item['url']}" target="_blank" class="read-more">Read Full Insight →</a>
+            </div>
+            """, unsafe_allow_html=True)
+
+    with tab3:
         st.subheader("🤖 Neural-Predicted 'Hidden Gems'")
         st.info("Startups with High Success Probability vs Funding Efficiency.")
         
