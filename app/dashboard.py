@@ -428,7 +428,8 @@ def main():
 
             # AI Memo Display - Improved Fallback
             raw_desc = gem_data['description']
-            desc_text = raw_desc if raw_desc and len(raw_desc) > 5 else f"Specialized venture in {gem_data['category_list']}."
+            category = gem_data.get('category_list', 'Technology')
+            desc_text = raw_desc if isinstance(raw_desc, str) and len(raw_desc) > 5 else f"Specialized venture in {category}."
             signal = "🟢 HIGH CONVICTION" if gem_data['success_prob'] > 0.8 else "🟡 MODERATE SIGNAL"
             
             st.markdown(f"""

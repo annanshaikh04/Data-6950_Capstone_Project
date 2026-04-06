@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 # Load API Keys
 BASE_DIR = Path(__file__).parent
-ENV_PATH = BASE_DIR / ".env"
+ENV_PATH = BASE_DIR.parent / ".env"
 
 if ENV_PATH.exists():
     load_dotenv(dotenv_path=ENV_PATH)
